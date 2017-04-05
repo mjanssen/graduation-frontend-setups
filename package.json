@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "node-cmd": "^2.0.0"
+  }
+}
