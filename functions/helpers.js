@@ -34,7 +34,7 @@ module.exports.removeFiles = (files = [], callback) => {
 };
 
 module.exports.moveTempFiles = (callback) => {
-  npc(`./${config.tempDirectoryName}`, `.`, (err) => {
+  ncp(`./${config.tempDirectoryName}`, `.`, (err) => {
     if (err) {
       exit(err);
     }
