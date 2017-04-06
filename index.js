@@ -32,8 +32,8 @@ fs.stat(`./_viewlayers/${setup}`, (err, stats) => {
   if (!stats.isDirectory()) {
     Helpers.exit('Setup directory is not a directory');
   }
-  cleanup();
-  // removeTempDir();
+
+  removeTempDir();
 });
 
 // Remove temporary directory
