@@ -85,24 +85,34 @@ const moveConfiguration = () => {
   Configuration.moveEditorConfig(moveApplicationSetup);
 };
 
+// Callback => moveBundlerConfiguration
 const moveApplicationSetup = () => {
   Setup.moveViewLayerSetup(setup, moveBundlerConfiguration);
 };
 
+// Callback => moveTemplateConfiguration
 const moveBundlerConfiguration = () => {
   Setup.moveBundlerSetup('webpack', moveTemplateConfiguration);
 };
 
+// Callback => moveGithooksConfiguration
 const moveTemplateConfiguration = () => {
-  Setup.moveTemplates(cleanup);
+  Setup.moveTemplates(moveGithooksConfiguration);
 };
 
+// Callback => cleanup
+const moveGithooksConfiguration = () => {
+  Setup.moveGithooks(cleanup);
+};
+
+// Callback => moveTempFilesToRoot
 const cleanup = () => {
   fs.readdir('.', (err, files) => {
     Helpers.removeFiles(files, moveTempFilesToRoot);
   });
 };
 
+// Callback => finished
 const moveTempFilesToRoot = () => {
   Helpers.moveTempFiles(finished);
 };

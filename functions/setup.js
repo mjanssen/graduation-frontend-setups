@@ -18,3 +18,9 @@ module.exports.moveTemplates = (callback) => {
   console.log('Moving templates');
   ncp(`./_templates/`, `./${config.tempDirectoryName}/templates`, callback);
 };
+
+
+module.exports.moveGithooks = (callback) => {
+  console.log('Moving githooks');
+  ncp(`./_config/.githooks/`, `./${config.tempDirectoryName}/.githooks`, callback);
+};
