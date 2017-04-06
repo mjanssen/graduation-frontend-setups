@@ -13,6 +13,7 @@ const exit = (message = '') => {
 module.exports.exit = exit;
 
 module.exports.removeFiles = (files = [], callback) => {
+  console.log('Cleaning up...')
   const fileAmount = files.length;
   let index = 0;
   let file = files[index];
