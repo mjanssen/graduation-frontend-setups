@@ -9,6 +9,7 @@ module.exports.dev = [
   'eslint-config-airbnb',
   'eslint-plugin-jsx-a11y',
   'eslint-plugin-react',
+  'eslint-plugin-import',
   'html-webpack-plugin',
   'husky',
   'webpack',
