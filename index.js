@@ -99,8 +99,12 @@ const moveTemplateConfiguration = () => {
 
 const cleanup = () => {
   fs.readdir('.', (err, files) => {
-    Helpers.removeFiles(files, finished);
+    Helpers.removeFiles(files, moveTempFilesToRoot);
   });
+};
+
+const moveTempFilesToRoot = () => {
+  Helpers.moveTempFiles(finished);
 };
 
 const finished = () => {
