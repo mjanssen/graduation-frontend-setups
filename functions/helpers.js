@@ -14,23 +14,38 @@ module.exports.exit = exit;
 
 module.exports.removeFiles = (files = [], callback) => {
   const fileAmount = files.length;
-  
+  let index = 0;
+
   const checkForCallback = (index) => {
-    if (index + 1 === fileAmount) {
+    if (index === fileAmount) {
       callback();
     }
   }
 
-  files.forEach((file, index) => {
-    if (file === config.tempDirectoryName) {
-      checkForCallback(index);
+  const removeFile = (index) => {
+
+    const file = files[index];
+
+    if (typeof file === 'undefined') {
       return;
     }
 
+    if (file === config.tempDirectoryName) {
+      index += 1;
+
+      checkForCallback(index);
+    }
+
     rimraf(file, () => {
+      index += 1;
+
       checkForCallback(index);
     });
-  });
+  };
+
+  if (fileAmount > 0) {
+    removeFile(0);
+  }
 };
 
 module.exports.moveTempFiles = (callback) => {
