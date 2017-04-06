@@ -53,6 +53,8 @@ module.exports.moveTempFiles = (callback) => {
       exit(err);
     }
 
-    callback();
+    rimraf(config.tempDirectoryName, () => {
+      callback();
+    });
   });
 };
