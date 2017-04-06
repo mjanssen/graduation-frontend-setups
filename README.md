@@ -19,7 +19,7 @@ so no unnecessary files are left. No global packages are needed to use this pack
 ## All right, how can I use it?
 
 The only requirement is having node.js installed [check it out here](https://nodejs.org/en/). If you want to use yarn, [an awesome npm alternative](https://yarnpkg.com/en/), no problem!
-We got you covered :)
+Got you covered bro ;)
 
 - Clone this git repo: `git clone https://github.com/mjanssen/graduation-frontend-setups.git`
 - Enter the directory and run `npm install` / `yarn install`
