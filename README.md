@@ -7,8 +7,12 @@ Included:
 - view-layer
 - basic implementation of view-layer
 - webpack
+  - dev server
+  - HMR (for a great developer experience)
+  - Access it from other devices (`http://your-ip:port` (by default the port will be 9000))
+  - Babel compiling for the ES6 fans :fire:
 - eslint
-- githooks to prevent the messy git merges ;)
+- githooks to prevent the messy git commits ;)
 
 ## How is this different than the other tools?
 
