@@ -25,7 +25,6 @@ module.exports.removeFiles = (files = [], callback) => {
       file = files[index];
       removeFile(file);
     } else {
-      // console.log('callback');
       callback();
     }
   };
@@ -37,7 +36,6 @@ module.exports.removeFiles = (files = [], callback) => {
 
     if (file != config.tempDirectoryName) {
       rimraf(file, () => {
-        console.log(`remove ${file}`);
         nextFile();
       });
     } else {
