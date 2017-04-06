@@ -32,8 +32,8 @@ fs.stat(`./_viewlayers/${setup}`, (err, stats) => {
   if (!stats.isDirectory()) {
     Helpers.exit('Setup directory is not a directory');
   }
-
-  removeTempDir();
+  cleanup();
+  // removeTempDir();
 });
 
 // Remove temporary directory
@@ -95,6 +95,12 @@ const moveBundlerConfiguration = () => {
 
 const moveTemplateConfiguration = () => {
   Setup.moveTemplates(finished);
+};
+
+const cleanup = () => {
+  fs.readdir('.', (err, files) => {
+    Helpers.removeFiles(files, finished);
+  });
 };
 
 const finished = () => {

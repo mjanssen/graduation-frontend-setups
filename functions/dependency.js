@@ -16,9 +16,6 @@ module.exports.install = (dependencies, dev, callback = false) => {
   }
 
   cmd.get(`${command}`, (data) => {
-    console.log(`-========================${dev}==============================-`);
-    console.log('data', data);
-    console.log(`-========================${dev}==============================-`);
     console.log(`${type} installed`);
 
     if (callback) {
