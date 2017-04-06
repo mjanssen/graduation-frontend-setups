@@ -3,6 +3,7 @@ const commandExists = require('command-exists').sync;
 const config = require('../config');
 
 module.exports.install = (dependencies, dev, callback = false) => {
+
   const type = `${dev ? 'dev ' : ''}dependencies`;
   const message = `Installing ${type}`;
   console.log(message);
@@ -11,11 +12,13 @@ module.exports.install = (dependencies, dev, callback = false) => {
   let command = `npm install --${save} ${dependencies}`;
 
   if (commandExists('yarn')) {
-    command = `yarn add --${save} ${dependencies}`;
+    command = `yarn add ${dependencies} --${save}`;
   }
 
-  cmd.get(`${command}`, () => {
-
+  cmd.get(`${command}`, (data) => {
+    console.log(`-========================${dev}==============================-`);
+    console.log('data', data);
+    console.log(`-========================${dev}==============================-`);
     console.log(`${type} installed`);
 
     if (callback) {
