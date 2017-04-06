@@ -94,7 +94,7 @@ const moveBundlerConfiguration = () => {
 };
 
 const moveTemplateConfiguration = () => {
-  Setup.moveTemplates(finished);
+  Setup.moveTemplates(cleanup);
 };
 
 const cleanup = () => {
