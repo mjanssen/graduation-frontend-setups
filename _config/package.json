@@ -5,7 +5,7 @@
   "scripts": {
     "precommit": "node ./.githooks/pre-commit.js",
     "webpack": "webpack",
-    "dev": "webpack-dev-server --config ./webpack/webpack.config.js --client-log-level warning"
+    "dev": "webpack-dev-server --config ./webpack/webpack.config.js --open --client-log-level warning"
   },
   "config": {
     "setup": "_SETUP_"
