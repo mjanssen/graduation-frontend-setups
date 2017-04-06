@@ -1,12 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackDashboard = require('webpack-dashboard/plugin');
 const config = require('./config');
 
 const dir = path.resolve(`${__dirname}/..`);
 
 // Define environment
 const ENV = process.env.NODE_ENV || 'development';
+const DASHBOARD = (process.env.npm_lifecycle_event === 'dashboard') ? 1 : 0;
 
 const webpackConfig = {
   entry: [
@@ -69,6 +71,12 @@ if (ENV === 'development') {
 
   // Define sourcemap for the development environment
   webpackConfig.devtool = 'cheap-module-eval-source-map';
+}
+
+if (DASHBOARD && ENV === 'development') {
+  webpackConfig.plugins.unshift(
+    new WebpackDashboard({ port: config.dashboardPort })
+  );
 }
 
 module.exports = webpackConfig;

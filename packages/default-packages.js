@@ -13,7 +13,8 @@ module.exports.dev = [
   'html-webpack-plugin',
   'husky',
   'webpack',
-  'webpack-dev-server'
+  'webpack-dev-server',
+  'webpack-dashboard',
 ];
 
 module.exports.main = [];
