@@ -33,6 +33,8 @@ Got you covered bro ;)
 
 Run `npm run dev` / `yarn run dev` to start the application!
 
+**Or**, if you feel like you need al the stats, just run `npm run dashboard` / `yarn run dashboard` :ok_hand:
+
 Happy coding :heart:
 
 ### Available setups
