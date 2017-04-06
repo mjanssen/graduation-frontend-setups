@@ -29,7 +29,7 @@ Got you covered bro ;)
 
 Run `npm run dev` / `yarn run dev` to start the application!
 
-Happy coding <3
+Happy coding :heart:
 
 ### Available setups
 
