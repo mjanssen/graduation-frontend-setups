@@ -1,0 +1,14 @@
+{
+  "sourceMaps": "true",
+  "presets": [
+    // webpack understands the native import syntax, and uses it for tree shaking
+    ["es2015", { "modules": false }],
+
+    // Transpile React components to JavaScript
+    "react"
+  ],
+  "plugins": [
+    ["transform-decorators-legacy"],
+    ["transform-react-jsx", { "pragma": "h" }]
+  ]
+}

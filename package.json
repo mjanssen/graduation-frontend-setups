@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "node-cmd": "^2.0.0"
+    "command-exists": "^1.2.2",
+    "ncp": "^2.0.0",
+    "node-cmd": "^2.0.0",
+    "rimraf": "^2.6.1",
+    "stream-replace": "^1.0.0"
   }
 }
