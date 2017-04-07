@@ -11,7 +11,9 @@ const exit = (message = '') => {
 };
 
 const debug = (message) => {
-  console.log(`DEBUG - ${message}`);
+  if (process.env.DEBUG) {
+    console.log(`DEBUG - ${message}`);
+  }
 };
 
 module.exports.exit = exit;
@@ -58,7 +60,7 @@ module.exports.moveTempFiles = (callback) => {
     if (err) {
       exit(err);
     }
-
+    
     debug(`${config.tempDirectoryName} content copied`);
 
     rimraf(config.tempDirectoryName, () => {

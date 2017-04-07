@@ -16,7 +16,9 @@ const Setup = require('./functions/setup');
 const props = process.argv.slice(2);
 const setup = props[0];
 const name = props[1];
-const debug = props.includes('debug');
+
+// Set the debug env variable
+process.env.DEBUG = process.argv.includes('debug');
 
 let configurations;
 
@@ -103,7 +105,7 @@ const moveTemplateConfiguration = () => {
 
 // Callback => cleanup
 const moveGithooksConfiguration = () => {
-  Setup.moveGithooks(cleanup);
+  Setup.moveGithooks(finished);
 };
 
 // Callback => moveTempFilesToRoot
