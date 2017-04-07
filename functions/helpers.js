@@ -11,7 +11,7 @@ const exit = (message = '') => {
 };
 
 const debug = (message) => {
-  if (process.env.DEBUG) {
+  if (process.env.DEBUG === 'true') {
     console.log(`DEBUG - ${message}`);
   }
 };
