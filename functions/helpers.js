@@ -10,7 +10,12 @@ const exit = (message = '') => {
   return process.exit(1);
 };
 
+const debug = (message) => {
+  console.log(`DEBUG - ${message}`);
+};
+
 module.exports.exit = exit;
+module.exports.debug = debug;
 
 module.exports.removeFiles = (files = [], callback) => {
   console.log('Cleaning up...')
@@ -37,6 +42,7 @@ module.exports.removeFiles = (files = [], callback) => {
 
     if (file != config.tempDirectoryName) {
       rimraf(file, () => {
+        debug(`${file} removed`);
         nextFile();
       });
     } else {
@@ -53,7 +59,10 @@ module.exports.moveTempFiles = (callback) => {
       exit(err);
     }
 
+    debug(`${config.tempDirectoryName} content copied`);
+
     rimraf(config.tempDirectoryName, () => {
+      debug(`${config.tempDirectoryName} removed`);
       callback();
     });
   });

@@ -16,6 +16,7 @@ const Setup = require('./functions/setup');
 const props = process.argv.slice(2);
 const setup = props[0];
 const name = props[1];
+const debug = props.includes('debug');
 
 let configurations;
 
