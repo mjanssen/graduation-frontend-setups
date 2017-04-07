@@ -1,0 +1,12 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "max-len": [1, 120, 2, { "ignoreComments": true }],
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+    "no-unused-vars": "warn"
+  },
+  "extends": ["airbnb"]
+}
