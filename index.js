@@ -22,6 +22,9 @@ process.env.DEBUG = process.argv.includes('debug');
 
 let configurations;
 
+const react = require(`./packages/react`);
+const preact = require(`./packages/preact`);
+
 if (typeof setup === 'undefined') {
   Helpers.exit('Setup required');
 }
@@ -69,10 +72,12 @@ const copyPackageJson = () => {
 const installPackages = () => {
   // Move node process to new directory
   process.chdir(config.tempDirectoryName);
+
+  const setupPackages = Package.createPackageString(configurations[setup]);
   
-  const devPackages = defaultPackages.dev.concat(configurations[setup].dev || []).join(' ');
-  const mainPackages = defaultPackages.main.concat(configurations[setup].main || []).join(' ');
-  
+  const devPackages = `${defaultPackages.dev.concat().join(' ')} ${setupPackages.dev}`;
+  const mainPackages = `${defaultPackages.main.concat().join(' ')} ${setupPackages.main}`;
+
   // Install normal- and dev dependencies.
   // Callback => moveConfiguration
   Dependency.install(

@@ -1,6 +1,6 @@
-module.exports.dev = [
-  'babel-plugin-transform-decorators-legacy'
-];
+module.exports.dev = {
+  'babel-plugin-transform-decorators-legacy': 'latest'
+};
 
 module.exports.main = [
   'preact',
