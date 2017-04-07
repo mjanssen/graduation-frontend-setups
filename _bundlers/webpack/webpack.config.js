@@ -54,6 +54,7 @@ if (ENV === 'development') {
     contentBase: path.join(dir, 'static'),
     hot: true,
     port: config.port,
+    address: config.address,
   };
 
   webpackConfig.plugins.push(
