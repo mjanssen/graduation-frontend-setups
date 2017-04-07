@@ -8,11 +8,12 @@ module.exports.install = (dependencies, dev, callback = false) => {
   const message = `Installing ${type}`;
   console.log(message);
   
-  const save = (dev) ? 'save-dev' : 'save';
-  let command = `npm install --${save} ${dependencies}`;
+  let save = (dev) ? '--save-dev' : '--save';
+  let command = `npm install ${save} ${dependencies}`;
 
   if (commandExists('yarn')) {
-    command = `yarn add ${dependencies} --${save}`;
+    save = (dev) ? '--save-dev' : '';
+    command = `yarn add ${save} ${dependencies}`;
   }
 
   cmd.get(`${command}`, (data) => {
