@@ -110,7 +110,7 @@ const moveTemplateConfiguration = () => {
 
 // Callback => cleanup
 const moveGithooksConfiguration = () => {
-  Setup.moveGithooks(finished);
+  Setup.moveGithooks(cleanup);
 };
 
 // Callback => moveTempFilesToRoot
