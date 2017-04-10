@@ -30,6 +30,7 @@ const webpackConfig = {
     extensions: ['.jsx', '.js', '.json', '.scss'],
     alias: {
       components: path.resolve(dir, 'app/components'),
+      style: path.resolve(dir, 'app/style'),
     },
   },
   output: {
@@ -49,9 +50,9 @@ const webpackConfig = {
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
           loader: [
-            `css-loader?modules&importLoaders=1&localIdentName=[path][name]_[local]--[hash:base64:5]&sourceMap=${sourcemaps}`,
+            `css-loader?modules&importLoaders=1&localIdentName=[path][name]_[local]--[hash:base64:5]&sourceMap=${SOURCEMAP}`,
             'postcss-loader',
-            `sass-loader?sourceMap=${sourcemaps}`,
+            `sass-loader?sourceMap=${SOURCEMAP}`,
           ].join('!'),
         }),
       },

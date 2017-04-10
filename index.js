@@ -19,6 +19,7 @@ const name = props[1];
 
 // Set the debug env variable
 process.env.DEBUG = process.argv.includes('debug');
+process.env.TESTING = process.argv.includes('testing');
 
 let configurations;
 
@@ -110,6 +111,10 @@ const moveTemplateConfiguration = () => {
 
 // Callback => cleanup
 const moveGithooksConfiguration = () => {
+  if (process.env.TESTING) {
+    return Setup.moveGithooks(finished);
+  }
+  
   Setup.moveGithooks(cleanup);
 };
 

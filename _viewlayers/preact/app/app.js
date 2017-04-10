@@ -1,5 +1,6 @@
 import { h, render } from 'preact';
 
+import 'style/global';
 // Define base component
 import App from './components/App/App';
 
