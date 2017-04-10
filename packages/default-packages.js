@@ -10,11 +10,15 @@ module.exports.dev = [
   'eslint-plugin-jsx-a11y',
   'eslint-plugin-react',
   'eslint-plugin-import',
+  'extract-text-webpack-plugin',
   'html-webpack-plugin',
   'husky',
+  'lost',
   'webpack',
   'webpack-dev-server',
   'webpack-dashboard',
+  'postcss-cssnext',
+  'postcss-reporter',
 ];
 
 module.exports.main = [];

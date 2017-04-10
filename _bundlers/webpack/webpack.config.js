@@ -1,13 +1,23 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackDashboard = require('webpack-dashboard/plugin');
+
+// Postcss
+const postcssNext = require('postcss-cssnext');
+const postcssLost = require('lost')();
+const postcssReporter = require('postcss-reporter')();
+
+// Custom configuration
 const config = require('./config');
 
 const dir = path.resolve(`${__dirname}/..`);
 
 // Define environment
 const ENV = process.env.NODE_ENV || 'development';
+const SOURCEMAP = (ENV === 'development');
 const DASHBOARD = (process.env.npm_lifecycle_event === 'dashboard') ? 1 : 0;
 
 const webpackConfig = {
@@ -17,7 +27,7 @@ const webpackConfig = {
     './app/app.js',
   ],
   resolve: {
-    extensions: ['.jsx', '.js', '.json', '.less'],
+    extensions: ['.jsx', '.js', '.json', '.scss'],
     alias: {
       components: path.resolve(dir, 'app/components'),
     },
@@ -33,9 +43,30 @@ const webpackConfig = {
         use: 'babel-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.(css|scss)$/,
+        exclude: [path.resolve(__dirname, 'src/components')],
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: [
+            `css-loader?modules&importLoaders=1&localIdentName=[path][name]_[local]--[hash:base64:5]&sourceMap=${sourcemaps}`,
+            'postcss-loader',
+            `sass-loader?sourceMap=${sourcemaps}`,
+          ].join('!'),
+        }),
+      },
     ],
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [
+          postcssNext,
+          postcssLost,
+          postcssReporter,
+        ],
+      },
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(ENV),
@@ -54,10 +85,16 @@ if (ENV === 'development') {
     contentBase: path.join(dir, 'static'),
     hot: true,
     port: config.port,
-    address: config.address,
+    host: config.address,
   };
 
   webpackConfig.plugins.push(
+    // Create a sepperate style.css file
+    new ExtractTextPlugin({
+      filename: 'style.css',
+      allChunks: true,
+      disable: (ENV === 'development'),
+    }),
     // Enable HMR globally
     new webpack.HotModuleReplacementPlugin(),
 
