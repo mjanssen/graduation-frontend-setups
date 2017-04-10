@@ -111,7 +111,7 @@ const moveTemplateConfiguration = () => {
 
 // Callback => cleanup
 const moveGithooksConfiguration = () => {
-  if (process.env.TESTING) {
+  if (process.env.TESTING === 'true') {
     return Setup.moveGithooks(finished);
   }
   
