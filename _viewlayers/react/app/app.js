@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+import 'style/global';
+
 // Define base component
 import App from './components/App/App';
 
