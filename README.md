@@ -2,8 +2,9 @@
 
 The application has the following setups implemented:
 
-- preact
-- react
+- `preact` :atom_symbol:
+- `react`
+- `react-router`
 
 ## All right, how can I use it?
 
