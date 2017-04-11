@@ -16,7 +16,7 @@ The only requirement is having node.js installed [check it out here](https://nod
 
 - Clone this git repo: `git clone https://github.com/mjanssen/graduation-frontend-setups.git`
 - Enter the directory and run `npm install` / `yarn install`
-- Run `node index.js _setup_` (see **Available setups**)
+- Run `node index.js __setup__` (see [available setups](#available-setups))
 - Let the node application handle everything
 - Profit!
 
@@ -38,7 +38,7 @@ Don't worry, the script will fall back to `npm` if `yarn` is not installed :)
 
 Included:
 
-- basic implementation of view-layer (see [Available setups](#available-setups))
+- basic implementation of view-layer (see [available setups](#available-setups))
 - webpack
   - dev server
   - HMR (for a great developer experience)
