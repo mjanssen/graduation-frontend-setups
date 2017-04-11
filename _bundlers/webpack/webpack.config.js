@@ -81,6 +81,14 @@ if (process.env.npm_package_config_setup === 'react' || process.env.npm_package_
   webpackConfig.entry.unshift('react-hot-loader/patch');
 }
 
+if (process.env.npm_package_config_setup === 'vue') {
+  webpackConfig.module.rules.unshift({
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      exclude: '/node_modules/',
+    });
+}
+
 if (ENV === 'development') {
   // Define configuration for the devserver
   webpackConfig.devServer = {
