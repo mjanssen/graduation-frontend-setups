@@ -1,6 +1,6 @@
 # What's this?
 
-This repository allows developers to create a complete front-end setup with all the tools a developer needs (check [included tools](#included-tools). It even removes itself when it's done!
+This repository allows developers to create a complete front-end setup with all the tools a developer needs (check [included tools](#included-tools)). It even removes itself when it's done!
 
 ## Available setups
 
