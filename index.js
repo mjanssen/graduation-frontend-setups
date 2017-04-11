@@ -59,6 +59,7 @@ const copyPackageJson = () => {
     preact: require(`./packages/preact`),
     react: require(`./packages/react/react`),
     'react-router': require(`./packages/react/react-router`),
+    vue: require('./packages/vue/vue'),
   };
 
   console.log(`Setting up ${setup} project`);
