@@ -23,6 +23,14 @@ Run `npm run dev` / `yarn run dev` to start the application!
 
 Happy coding :heart:
 
+### Brotip :+1:
+
+If you do not have `yarn` installed, you should consider installing it. Using `yarn` will speed up the 
+installation of your dependencies. Check out their [stats vs npm](https://yarnpkg.com/lang/en/compare/). Or if you want
+a less biased test, check out [this git repo](https://github.com/appleboy/npm-vs-yarn).
+
+Don't worry, the script will fall back to `npm` if `yarn` is not installed :)
+
 ## Making frontend setups easy
 
 This repository allows developers to create a front-end setup with all the tools a developer needs.
