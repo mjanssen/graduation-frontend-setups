@@ -1,3 +1,7 @@
+# What's this?
+
+This repository allows developers to create a complete front-end setup with all the tools a developer needs (check [included tools](#included-tools). It even removes itself when it's done!
+
 ## Available setups
 
 The application has the following setups implemented:
@@ -19,7 +23,7 @@ Got you covered bro ;)
 
 Run `npm run dev` / `yarn run dev` to start the application!
 
-**Or**, if you feel like you need al the stats, just run `npm run dashboard` / `yarn run dashboard` :ok_hand:
+**Or**, if you're an astronaut during the weekends :rocket:, run `npm run dashboard` / `yarn run dashboard` for a cool dashboard.
 
 Happy coding :heart:
 
@@ -31,14 +35,11 @@ a less biased test, check out [this git repo](https://github.com/appleboy/npm-vs
 
 Don't worry, the script will fall back to `npm` if `yarn` is not installed :)
 
-## Making frontend setups easy
-
-This repository allows developers to create a front-end setup with all the tools a developer needs.
+## Included tools
 
 Included:
 
-- view-layer
-- basic implementation of view-layer
+- basic implementation of view-layer (see [Available setups](#available-setups))
 - webpack
   - dev server
   - HMR (for a great developer experience)
@@ -50,8 +51,8 @@ Included:
 ## How is this different than the other tools?
 
 This tool is used to create a small project of the latest and greatest view-layers. The implementation is so small,
-developers can easily customize the setup (if they want to). The 'setup tool' is even removing itself when completed,
-so no unnecessary files are left. No global packages are needed to use this package (besides node and npm (or yarn ;)).
+developers can easily customize the setup (if they want to). The 'setup tool' will even remove itself when completed,
+so no unnecessary files are left. No other global packages than `node` and `npm` (or `yarn`) are needed.
 
 ## Help! It broke!
 
