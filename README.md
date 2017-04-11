@@ -12,8 +12,7 @@ The application has the following setups implemented:
 
 ## All right, how can I use it?
 
-The only requirement is having node.js installed [check it out here](https://nodejs.org/en/). If you want to use yarn, [an awesome npm alternative](https://yarnpkg.com/en/)), no problem!
-Got you covered bro ;)
+The only requirement is having node.js installed [check it out here](https://nodejs.org/en/). If you want to use yarn ([an awesome npm alternative](https://yarnpkg.com/en/)), no problem, got you covered!
 
 - Clone this git repo: `git clone https://github.com/mjanssen/graduation-frontend-setups.git`
 - Enter the directory and run `npm install` / `yarn install`
