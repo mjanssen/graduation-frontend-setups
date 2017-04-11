@@ -23,9 +23,6 @@ process.env.TESTING = process.argv.includes('testing');
 
 let configurations;
 
-const react = require(`./packages/react`);
-const preact = require(`./packages/preact`);
-
 if (typeof setup === 'undefined') {
   Helpers.exit('Setup required');
 }
@@ -59,8 +56,9 @@ const createTempDirectory = () => {
 
 const copyPackageJson = () => {
   configurations = {
-    react: require(`./packages/react`),
     preact: require(`./packages/preact`),
+    react: require(`./packages/react/react`),
+    'react-router': require(`./packages/react/react-router`),
   };
 
   console.log(`Setting up ${setup} project`);
