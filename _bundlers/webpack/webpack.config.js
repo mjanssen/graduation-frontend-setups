@@ -36,6 +36,7 @@ const webpackConfig = {
   output: {
     path: path.resolve(dir, 'static'),
     filename: 'main.bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -76,7 +77,7 @@ const webpackConfig = {
   ],
 };
 
-if (process.env.npm_package_config_setup === 'react') {
+if (process.env.npm_package_config_setup === 'react' || process.env.npm_package_config_setup === 'react-router') {
   webpackConfig.entry.unshift('react-hot-loader/patch');
 }
 
@@ -87,6 +88,7 @@ if (ENV === 'development') {
     hot: true,
     port: config.port,
     host: config.address,
+    historyApiFallback: true,
   };
 
   webpackConfig.plugins.push(
