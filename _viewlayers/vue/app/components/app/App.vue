@@ -15,7 +15,7 @@
     data() {
       return {
         message: 'hey there!',
-        path: 'app/components/App/App.vue',
+        path: 'app/components/app/App.vue',
       };
     },
     computed: {
