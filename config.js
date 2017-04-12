@@ -1,5 +1,6 @@
 module.exports = {
-  defaultApplicationName: 'dpdk-frontend-setup',
-  defaultApplicationDescription: 'This package was built with the dpdk front-end setup tool',
+  version: 0.8,
+  defaultApplicationName: 'frontend-setup',
+  defaultApplicationDescription: 'This package was built with the front-end setup tool',
   tempDirectoryName: 'temp-application',
 };

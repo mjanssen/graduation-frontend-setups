@@ -2,6 +2,10 @@
   "name": "_NAME_",
   "version": "1.0.0",
   "description": "_DESCRIPTION_",
+  "setup": {
+    "url": "https://github.com/mjanssen/graduation-frontend-setups",
+    "version": "_VERSION_"
+  },
   "scripts": {
     "precommit": "node ./.githooks/pre-commit.js",
     "webpack": "webpack",

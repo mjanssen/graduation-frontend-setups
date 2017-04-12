@@ -43,6 +43,7 @@ module.exports.movePackageJson = (setup, callback) => {
       read
       .pipe(replace('_NAME_', config.defaultApplicationName))
       .pipe(replace('_DESCRIPTION_', config.defaultApplicationDescription))
+      .pipe(replace('_VERSION_', config.version))
       .pipe(replace('_SETUP_', setup))
       .pipe(write);
     }
