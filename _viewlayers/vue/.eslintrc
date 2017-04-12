@@ -5,7 +5,12 @@
   },
   "rules": {
     "max-len": [1, 120, 2, { "ignoreComments": true }],
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+
+    // Deny webpack alias errors
+    "import/no-extraneous-dependencies": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off"
   },
   "extends": ["airbnb/base"],
   "plugins": [
