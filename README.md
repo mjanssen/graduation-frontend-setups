@@ -29,7 +29,7 @@ Happy coding :heart:
 
 ### Brotip :+1:
 
-If you do not have `yarn` installed, you should consider installing it. Using `yarn` will speed up the 
+If you do not have `yarn` installed, you should consider installing it ([Installation page of Yarn](https://yarnpkg.com/lang/en/docs/install/)). Using `yarn` will speed up the 
 installation of your dependencies. Check out their [stats vs npm](https://yarnpkg.com/lang/en/compare/). Or if you want
 a less biased test, check out [this git repo](https://github.com/appleboy/npm-vs-yarn).
 
