@@ -41,6 +41,12 @@ Don't worry, the script will fall back to `npm` if `yarn` is not installed :)
 
 ---
 
+## Requirements
+
+- Having Node 6+ installed ([Upgrade steps](https://nodecasts.io/update-node-js/))
+
+---
+
 ## Included tools
 
 Included:
