@@ -2,6 +2,8 @@
 
 This repository allows developers to create a complete front-end setup with all the tools a developer needs (check [included tools](#included-tools)). It even removes itself when it's done!
 
+---
+
 ## Available setups
 
 The application has the following setups implemented:
@@ -10,6 +12,8 @@ The application has the following setups implemented:
 - `react`
 - `react-router`
 - `vue` :leaves:
+
+---
 
 ## All right, how can I use it?
 
@@ -35,6 +39,8 @@ a less biased test, check out [this git repo](https://github.com/appleboy/npm-vs
 
 Don't worry, the script will fall back to `npm` if `yarn` is not installed :)
 
+---
+
 ## Included tools
 
 Included:
@@ -48,12 +54,22 @@ Included:
 - eslint
 - githooks to prevent the messy git commits ;)
 
+---
+
 ## How is this different than the other tools?
 
 This tool is used to create a small project of the latest and greatest view-layers. The implementation is so small,
 developers can easily customize the setup (if they want to). The 'setup tool' will even remove itself when completed,
 so no unnecessary files are left. No other global packages than `node` and `npm` (or `yarn`) are needed.
 
-## Help! It broke!
+---
+
+## Help! Something is not working!
 
 Don't hesitate to create an issue. I'm ready to help you out.
+
+---
+
+## Licence
+
+MIT
