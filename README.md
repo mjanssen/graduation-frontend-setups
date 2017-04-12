@@ -68,6 +68,9 @@ This tool is used to create a small project of the latest and greatest view-laye
 developers can easily customize the setup (if they want to). The 'setup tool' will even remove itself when completed,
 so no unnecessary files are left. No other global packages than `node` and `npm` (or `yarn`) are needed.
 
+This repository was created after researching the following tools: Vue-CLI, create-react-app, Yeoman and Kyt.
+They're all great tools, but they all had something which maked the usage less convenient. Installing global dependencies, being limited to one setup, having to many setups available, not able to implement your own setup e.g.
+
 ---
 
 ## Help! Something is not working!
