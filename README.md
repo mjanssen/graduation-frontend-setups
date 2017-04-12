@@ -9,6 +9,7 @@ The application has the following setups implemented:
 - `preact` :atom_symbol:
 - `react`
 - `react-router`
+- `vue` :leaves:
 
 ## All right, how can I use it?
 
