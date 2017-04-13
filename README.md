@@ -9,6 +9,7 @@ This repository allows developers to create a complete front-end setup with all 
 The application has the following setups implemented:
 
 - `preact` :atom_symbol:
+- `preact-redux` :rocket:
 - `react`
 - `react-router`
 - `vue` :leaves:

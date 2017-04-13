@@ -57,6 +57,7 @@ const createTempDirectory = () => {
 const copyPackageJson = () => {
   configurations = {
     preact: require(`./packages/preact`),
+    'preact-redux': require(`./packages/preact/preact-redux`),
     react: require(`./packages/react/react`),
     'react-router': require(`./packages/react/react-router`),
     vue: require('./packages/vue/vue'),
