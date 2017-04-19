@@ -19,7 +19,8 @@ const name = props[1];
 
 // Set the debug env variable
 process.env.DEBUG = process.argv.includes('debug');
-process.env.TESTING = process.argv.includes('testing');
+process.env.TESTING = process.argv.includes('testing') || process.argv.includes('skip');
+process.env.SKIP = process.argv.includes('skip');
 
 let configurations;
 
@@ -131,5 +132,5 @@ const moveTempFilesToRoot = () => {
 };
 
 const finished = () => {
-  console.log('Completed :)');
+  console.log('🔥 Completed');
 }
