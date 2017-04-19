@@ -23,7 +23,7 @@ module.exports.install = (dependencies, dev, callback = false) => {
   }
 
   if (process.env.SKIP === 'true') {
-    console.log(`⏭  ${type} skipped`);
+    console.log(`🔥 ${type} skipped`);
 
     if (callback) {
       callback();
