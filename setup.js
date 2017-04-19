@@ -36,7 +36,6 @@ const start = (_setup = false, _extensions = []) => {
 
 // This function is called when a user calls index.js
 const quickStart = () => {
-  console.log('props', props);
   setup = props[0];
   name = props[1];
   extensions = true; // True means all extensions are used
