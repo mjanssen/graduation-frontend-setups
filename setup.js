@@ -141,7 +141,7 @@ const moveGithooksConfiguration = () => {
     return Setup.moveGithooks(finished);
   }
   
-  // Setup.moveGithooks(cleanup);
+  Setup.moveGithooks(cleanup);
 };
 
 // Callback => moveTempFilesToRoot
