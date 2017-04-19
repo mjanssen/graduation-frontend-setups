@@ -16,8 +16,13 @@ const debug = (message) => {
   }
 };
 
+const emptyLog = () => {
+  console.log('');
+};
+
 module.exports.exit = exit;
 module.exports.debug = debug;
+module.exports.emptyLog = emptyLog;
 
 module.exports.removeFiles = (files = [], callback) => {
   console.log('Cleaning up...')

@@ -43,14 +43,14 @@ fs.stat(`./_viewlayers/${setup}`, (err, stats) => {
 
 // Remove temporary directory
 const removeTempDir = () => {
-  console.log('Removing temporary directory');
+  console.log('🔨  Removing temporary directory');
   // Callback => createTempDirectory
   rimraf(`./${config.tempDirectoryName}`, createTempDirectory);
 };
 
 // Create temporary directory for the application
 const createTempDirectory = () => {
-  console.log(`Creating directory '${config.tempDirectoryName}'`);
+  console.log(`🔨  Creating directory '${config.tempDirectoryName}'`);
   // Callback => copyPackageJson
   fs.mkdir(config.tempDirectoryName, copyPackageJson);
 };
@@ -58,7 +58,9 @@ const createTempDirectory = () => {
 // packages.js exists | Callback => installPackages
 // No packages.js in setup | Callback => moveConfiguration
 const copyPackageJson = () => {
-  console.log(`Setting up ${setup} project`);
+  Helpers.emptyLog();
+  console.log(`✨  Setting up ${setup} project`);
+  Helpers.emptyLog();
 
   fs.stat(`./_viewlayers/${setup}/packages.js`, (err, stats) => {
 
@@ -93,6 +95,7 @@ const installPackages = () => {
 };
 
 const moveConfiguration = () => {
+  Helpers.emptyLog();
   // Jump one directory up with node process
   process.chdir(`../`);
 
@@ -136,5 +139,6 @@ const moveTempFilesToRoot = () => {
 };
 
 const finished = () => {
-  console.log('🔥 Completed');
+  Helpers.emptyLog();
+  console.log('🔥  Completed');
 }
