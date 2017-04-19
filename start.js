@@ -18,6 +18,8 @@ fs.readdir('./_viewlayers', (err, files) => {
     };
   });
 
+  setups.push(new inquirer.Separator(), 'Enter git url');
+
   const finalQuestions = questions.getQuestions(setups);
   askQuestions(finalQuestions);
 });
