@@ -11,17 +11,7 @@ const Helpers = require('./helpers');
 module.exports.install = (dependencies, dev, callback = false) => {
 
   const type = `${dev ? 'dev' : 'main'} dependencies`;
-
-  if (process.env.SKIP === 'true') {
-    console.log(`⏭  ${type} skipped`);
-
-    if (callback) {
-      callback();
-    }
-    return;
-  }
-
-  const message = `Installing ${type}, this may take a while...`;
+  const message = `Installing ${type}`;
   console.log(message);
   
   let save = (dev) ? '--save-dev' : '--save';
@@ -30,6 +20,15 @@ module.exports.install = (dependencies, dev, callback = false) => {
   if (commandExists('yarn')) {
     save = (dev) ? '-D ' : '';
     command = `yarn add ${save}${dependencies}`;
+  }
+
+  if (process.env.SKIP === 'true') {
+    console.log(`⏭  ${type} skipped`);
+
+    if (callback) {
+      callback();
+    }
+    return;
   }
 
   Helpers.debug(`Running ${command}`);
