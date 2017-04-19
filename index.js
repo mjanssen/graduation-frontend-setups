@@ -22,7 +22,7 @@ process.env.DEBUG = process.argv.includes('debug');
 process.env.TESTING = process.argv.includes('testing') || process.argv.includes('skip');
 process.env.SKIP = process.argv.includes('skip');
 
-let configurations;
+let configuration;
 
 if (typeof setup === 'undefined') {
   Helpers.exit('Setup required');
@@ -31,7 +31,7 @@ if (typeof setup === 'undefined') {
 // Callback => removeTempDir
 fs.stat(`./_viewlayers/${setup}`, (err, stats) => {
   if (err) {
-    Helpers.exit('Setup directory does not exist');
+    Helpers.exit(`Setup directory '${setup}' does not exist in _viewlayers`);
   }
 
   if (!stats.isDirectory()) {
@@ -55,27 +55,31 @@ const createTempDirectory = () => {
   fs.mkdir(config.tempDirectoryName, copyPackageJson);
 };
 
+// packages.js exists | Callback => installPackages
+// No packages.js in setup | Callback => moveConfiguration
 const copyPackageJson = () => {
-  configurations = {
-    preact: require(`./packages/preact`),
-    'preact-redux': require(`./packages/preact/preact-redux`),
-    react: require(`./packages/react/react`),
-    'react-router': require(`./packages/react/react-router`),
-    vue: require('./packages/vue/vue'),
-  };
-
   console.log(`Setting up ${setup} project`);
 
-  // Use function to move the package.json file. Pass installPackages as callback
-  // Callback => installPackages
-  Package.movePackageJson(setup, installPackages);
+  fs.stat(`./_viewlayers/${setup}/packages.js`, (err, stats) => {
+
+    if (err) {
+      console.log('No packages.js file found, skipping dependency installation');
+      return moveConfiguration();
+    }
+    
+    configuration = require(`./_viewlayers/${setup}/packages`);
+
+    // Use function to move the package.json file. Pass installPackages as callback
+    // Callback => installPackages
+    Package.movePackageJson(setup, installPackages);
+  });
 };
 
 const installPackages = () => {
   // Move node process to new directory
   process.chdir(config.tempDirectoryName);
 
-  const setupPackages = Package.createPackageString(configurations[setup]);
+  const setupPackages = Package.createPackageString(configuration);
   
   const devPackages = `${defaultPackages.dev.concat().join(' ')} ${setupPackages.dev}`;
   const mainPackages = `${defaultPackages.main.concat().join(' ')} ${setupPackages.main}`;
