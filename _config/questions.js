@@ -1,3 +1,11 @@
+const config = require('./config');
+
+const checkIfGitSetup = (setup) => {
+  return (answers) => {
+    return answers.setup === setup;
+  };
+};
+
 const getQuestions = setupChoices => (
   [
     {
@@ -5,6 +13,17 @@ const getQuestions = setupChoices => (
       name: 'setup',
       message: 'Select your desired setup',
       choices: setupChoices,
+    },
+    {
+      type: 'input',
+      name: 'gitUrl',
+      message: 'Enter your git url',
+      when: checkIfGitSetup(config.questions.requestGitUrl),
+      validate: (value) => {
+        // Regex to verify if the given value is a git repository
+        const regex = /(?:git|ssh|https?|git@[-\w.]+):(\/\/)?(.*?)(\.git)(\/?|\#[-\d\w._]+?)$/;
+        return regex.test(value);
+      }
     },
     {
       type: 'checkbox',

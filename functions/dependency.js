@@ -3,7 +3,7 @@ const cmd = require('node-cmd');
 const commandExists = require('command-exists').sync;
 
 // Custom config files
-const config = require('../config');
+const config = require('../_config/config');
 
 // Define custom functions
 const Helpers = require('./helpers');

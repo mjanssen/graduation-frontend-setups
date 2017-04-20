@@ -3,7 +3,7 @@ const ncp = require('ncp').ncp;
 const rimraf = require('rimraf');
 
 // Custom config files
-const config = require('../config');
+const config = require('../_config/config');
 
 const exit = (message = '') => {
   console.log(message);
@@ -47,7 +47,7 @@ module.exports.removeFiles = (files = [], callback) => {
       return;
     }
 
-    if (file != config.tempDirectoryName) {
+    if (file != config.directory.tempDirectoryName) {
       rimraf(file, () => {
         debug(`${file} removed`);
         nextFile();
@@ -61,15 +61,15 @@ module.exports.removeFiles = (files = [], callback) => {
 };
 
 module.exports.moveTempFiles = (callback) => {
-  ncp(`./${config.tempDirectoryName}`, `.`, (err) => {
+  ncp(`./${config.directory.tempDirectoryName}`, `.`, (err) => {
     if (err) {
       exit(err);
     }
     
-    debug(`${config.tempDirectoryName} content copied`);
+    debug(`${config.directory.tempDirectoryName} content copied`);
 
-    rimraf(config.tempDirectoryName, () => {
-      debug(`${config.tempDirectoryName} removed`);
+    rimraf(config.directory.tempDirectoryName, () => {
+      debug(`${config.directory.tempDirectoryName} removed`);
       callback();
     });
   });

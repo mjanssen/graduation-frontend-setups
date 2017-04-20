@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "command-exists": "^1.2.2",
+    "git-clone": "^0.1.0",
     "inquirer": "^3.0.6",
     "ncp": "^2.0.0",
     "node-cmd": "^2.0.0",

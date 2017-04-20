@@ -1,10 +1,11 @@
 // Node packages
 const fs = require('fs');
 const rimraf = require('rimraf');
+const clone = require('git-clone');
 
 // Custom config files
 const defaultPackages = require('./packages/default-packages');
-const config = require('./config');
+const config = require('./_config/config');
 
 // Define custom functions
 const Helpers = require('./functions/helpers');
@@ -17,6 +18,7 @@ let props = process.argv.slice(2);
 let setup;
 let name;
 let extensions;
+let gitRepo = false;
 
 // Set the debug env variable
 process.env.DEBUG = process.argv.includes('debug');
@@ -26,12 +28,17 @@ process.env.SKIP = process.argv.includes('skip');
 let configuration;
 
 // This function is called after the user filled the questions from start.js
-const start = (_setup = false, _extensions = []) => {
+const start = (answers) => {
   Helpers.emptyLog();
-  setup = _setup;
-  extensions = _extensions;
+  setup = answers.setup;
+  extensions = answers.extensions;
+  gitRepo = (typeof answers.gitUrl !== 'undefined') ? answers.gitUrl : false;
 
-  continueSetup();
+  if (gitRepo) {
+    return removeGitTempDir();
+  }
+
+  // continueSetup();
 };
 
 // This function is called when a user calls index.js
@@ -41,6 +48,20 @@ const quickStart = () => {
   extensions = true; // True means all extensions are used
 
   continueSetup();
+};
+
+const removeGitTempDir = () => {
+  console.log('🔨  Removing temporary git directory');
+  // Callback => pullGitRepository
+  rimraf(`./${config.directory.gitTempDirectoryName}`, pullGitRepository);
+};
+
+const pullGitRepository = () => {
+  console.log(`✨  Cloning ${gitRepo}`);
+  clone(gitRepo, config.directory.gitTempDirectoryName, () => {
+    console.log('👌  Finished cloning');
+    removeTempDir();
+  });
 };
 
 const continueSetup = () => {
@@ -62,14 +83,14 @@ const continueSetup = () => {
 const removeTempDir = () => {
   console.log('🔨  Removing temporary directory');
   // Callback => createTempDirectory
-  rimraf(`./${config.tempDirectoryName}`, createTempDirectory);
+  rimraf(`./${config.directory.tempDirectoryName}`, createTempDirectory);
 };
 
 // Create temporary directory for the application
 const createTempDirectory = () => {
-  console.log(`🔨  Creating directory '${config.tempDirectoryName}'`);
+  console.log(`🔨  Creating directory '${config.directory.tempDirectoryName}'`);
   // Callback => copyPackageJson
-  fs.mkdir(config.tempDirectoryName, copyPackageJson);
+  fs.mkdir(config.directory.tempDirectoryName, copyPackageJson);
 };
 
 // packages.js exists | Callback => installPackages
@@ -79,14 +100,18 @@ const copyPackageJson = () => {
   console.log(`✨  Setting up ${setup} project`);
   Helpers.emptyLog();
 
-  fs.stat(`./_viewlayers/${setup}/packages.js`, (err, stats) => {
+  const packagesPath = (gitRepo)
+    ? `./${config.directory.gitTempDirectoryName}/packages`
+    : `./_viewlayers/${setup}/packages`;
+
+  fs.stat(`${packagesPath}.js`, (err, stats) => {
 
     if (err) {
       console.log('No packages.js file found, skipping dependency installation');
       return moveConfiguration();
     }
     
-    configuration = require(`./_viewlayers/${setup}/packages`);
+    configuration = require(packagesPath);
 
     // Use function to move the package.json file. Pass installPackages as callback
     // Callback => installPackages
@@ -96,7 +121,7 @@ const copyPackageJson = () => {
 
 const installPackages = () => {
   // Move node process to new directory
-  process.chdir(config.tempDirectoryName);
+  process.chdir(config.directory.tempDirectoryName);
 
   const setupPackages = Package.createPackageString(configuration);
   

@@ -5,6 +5,9 @@ const inquirer = require('inquirer');
 // Require questions
 const questions = require('./_config/questions');
 
+// Require global config
+const config = require('./_config/config');
+
 // Require the setup tool
 const tool = require('./setup');
 
@@ -18,7 +21,7 @@ fs.readdir('./_viewlayers', (err, files) => {
     };
   });
 
-  setups.push(new inquirer.Separator(), 'Enter git url');
+  setups.push(new inquirer.Separator(), config.questions.requestGitUrl);
 
   const finalQuestions = questions.getQuestions(setups);
   askQuestions(finalQuestions);
@@ -30,5 +33,5 @@ const askQuestions = (finalQuestions) => {
 };
 
 const handleAnswers = (answers) => {
-  tool.start(answers.setup, answers.extensions);
+  tool.start(answers);
 };
