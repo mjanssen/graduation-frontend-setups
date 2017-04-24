@@ -67,7 +67,9 @@ const pullGitRepository = () => {
     console.log('👌  Finished cloning');
     Helpers.emptyLog();
     
-    return createTempDirectory();
+    // Remove .git directory from the pulled repo
+    // Callback => createTempDirectory
+    rimraf(`./${config.directory.tempDirectory}/.git`, createTempDirectory);
   });
 };
 
