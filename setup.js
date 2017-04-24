@@ -18,6 +18,7 @@ let props = process.argv.slice(2);
 let setup;
 let name;
 let extensions;
+let packagesSet = false;
 let gitRepo = false;
 
 // Set the debug env variable
@@ -124,6 +125,7 @@ const copyPackageJson = () => {
       return moveConfiguration();
     }
     
+    packagesSet = true;
     configuration = require(packagesPath);
 
     // Use function to move the package.json file. Pass installPackages as callback
@@ -224,6 +226,11 @@ const moveGithooksConfiguration = () => {
 // Callback => moveTempFilesToRoot
 const cleanup = () => {
   fs.readdir('.', (err, files) => {
+    // If packages.js was set, remove them from the directory
+    if (packagesSet) {
+      files.push(`./${config.directory.tempDirectoryName}/packages.js`);
+    }
+
     Helpers.removeFiles(files, moveTempFilesToRoot);
   });
 };
