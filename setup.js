@@ -38,7 +38,7 @@ const start = (answers) => {
     return removeGitTempDir();
   }
 
-  // continueSetup();
+  continueSetup();
 };
 
 // This function is called when a user calls index.js
@@ -136,22 +136,52 @@ const installPackages = () => {
     Dependency.install.bind(this, devPackages, 1, moveConfiguration));
 };
 
+// Only move editorconfig if the user selected this
 const moveConfiguration = () => {
   Helpers.emptyLog();
   // Jump one directory up with node process
   process.chdir(`../`);
 
-  Configuration.moveEditorConfig(moveApplicationSetup);
+  if (typeof extensions === 'object' && extensions.includes('editorconfig')) {
+    return Configuration.moveEditorConfig(moveApplicationSetup);
+  }
+
+  return moveApplicationSetup();
+};
+
+// Callback => checkIfESLintEnabled
+const moveApplicationSetup = () => {
+  Setup.moveViewLayerSetup(setup, checkIfESLintEnabled);
 };
 
 // Callback => moveBundlerConfiguration
-const moveApplicationSetup = () => {
-  Setup.moveViewLayerSetup(setup, moveBundlerConfiguration);
+const checkIfESLintEnabled = () => {
+  if (typeof extensions === 'object' && extensions.includes('eslint') === false) {
+    console.log('ESLint was not enabled');
+    removeESLintConfig();
+  }
+
+  return moveBundlerConfiguration();
+}
+
+const removeESLintConfig = () => {
+  const ESLintPath = `${config.directory.tempDirectoryName}/.eslintrc`;
+  fs.stat(ESLintPath, (err, stats) => {
+    fs.unlink(ESLintPath, (err) => {
+      if (err) {
+        console.log('err', err);
+      }
+      console.log('ESLint configuration removed')
+    });
+  });
 };
 
 // Callback => moveTemplateConfiguration
 const moveBundlerConfiguration = () => {
-  Setup.moveBundlerSetup('webpack', moveTemplateConfiguration);
+  // extensions[0] reffers to bundler
+  // Default is webpack configuration
+  const bundler = (typeof extensions[0] === 'undefined') ? 'webpack' : extensions[0];
+  Setup.moveBundlerSetup(extensions[0], moveTemplateConfiguration);
 };
 
 // Callback => moveGithooksConfiguration
@@ -161,11 +191,21 @@ const moveTemplateConfiguration = () => {
 
 // Callback => cleanup
 const moveGithooksConfiguration = () => {
+  // Only move githooks if the user selected them
+  if (typeof extensions === 'object' && extensions.includes('githooks')) {
+    if (process.env.TESTING === 'true') {
+      return Setup.moveGithooks(finished);
+    }
+  
+    return Setup.moveGithooks(cleanup);
+  }
+
+  // If githooks are not selected, continue without moving them
   if (process.env.TESTING === 'true') {
-    return Setup.moveGithooks(finished);
+    return finished();
   }
   
-  Setup.moveGithooks(cleanup);
+  return cleanup();
 };
 
 // Callback => moveTempFilesToRoot
