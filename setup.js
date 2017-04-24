@@ -1,8 +1,12 @@
+let fs;
+let rimraf;
+let clone;
+
 // Node packages
 try {
-  const fs = require('fs');
-  const rimraf = require('rimraf');
-  const clone = require('git-clone');
+  fs = require('fs');
+  rimraf = require('rimraf');
+  clone = require('git-clone');
 } catch (e) {
   console.log(`🙁  Packages missing, run 'npm install' / 'yarn install' first`);
   process.exit(0);

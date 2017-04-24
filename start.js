@@ -1,7 +1,11 @@
+let fs;
+let readline;
+let inquirer;
+
 try {
-  const fs = require('fs');
-  const readline = require('readline');
-  const inquirer = require('inquirer');
+  fs = require('fs');
+  readline = require('readline');
+  inquirer = require('inquirer');
 } catch (e) {
   console.log(`🙁  Packages missing, run 'npm install' / 'yarn install' first`);
   process.exit(0);
