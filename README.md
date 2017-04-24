@@ -10,8 +10,8 @@ The application has the following setups implemented:
 
 - `preact` :atom_symbol:
 - `preact-redux` :rocket:
-- `react`
-- `react-router`
+- `react` :atom_symbol:
+- `react-router` :atom_symbol:
 - `vue` :leaves:
 
 ---
@@ -22,6 +22,15 @@ The only requirement is having node.js installed [check it out here](https://nod
 
 - Clone this git repo: `git clone https://github.com/mjanssen/graduation-frontend-setups.git`
 - Enter the directory and run `npm install` / `yarn install`
+
+You got two options now, use the configurator to enable / disable some extensions (ESLint, githooks, editorconfig) OR just install the complete setup without configuration;
+
+#### Use configuration
+- Run `node start.js`
+- Follow instructions
+- Profit!
+
+#### Fast process
 - Run `node index.js __setup__` (see [available setups](#available-setups))
 - Let the node application handle everything
 - Profit!
