@@ -24,6 +24,14 @@ module.exports.exit = exit;
 module.exports.debug = debug;
 module.exports.emptyLog = emptyLog;
 
+module.exports.removeTempDirectories = (callback) => {
+  console.log('🔨  Removing temporary git directory');
+  rimraf(`./${config.directory.gitTempDirectoryName}`, () => {
+    console.log('🔨  Removing temporary app directory');
+    rimraf(`./${config.directory.gitTempDirectoryName}`, callback);
+  });
+};
+
 module.exports.removeFiles = (files = [], callback) => {
   console.log('Cleaning up...')
   const fileAmount = files.length;
@@ -47,7 +55,7 @@ module.exports.removeFiles = (files = [], callback) => {
       return;
     }
 
-    if (file != config.directory.tempDirectoryName) {
+    if (file != config.directory.tempDirectory) {
       rimraf(file, () => {
         debug(`${file} removed`);
         nextFile();
@@ -61,15 +69,15 @@ module.exports.removeFiles = (files = [], callback) => {
 };
 
 module.exports.moveTempFiles = (callback) => {
-  ncp(`./${config.directory.tempDirectoryName}`, `.`, (err) => {
+  ncp(`./${config.directory.tempDirectory}`, `.`, (err) => {
     if (err) {
       exit(err);
     }
     
-    debug(`${config.directory.tempDirectoryName} content copied`);
+    debug(`${config.directory.tempDirectory} content copied`);
 
-    rimraf(config.directory.tempDirectoryName, () => {
-      debug(`${config.directory.tempDirectoryName} removed`);
+    rimraf(config.directory.tempDirectory, () => {
+      debug(`${config.directory.tempDirectory} removed`);
       callback();
     });
   });

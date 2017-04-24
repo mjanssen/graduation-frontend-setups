@@ -20,6 +20,8 @@ let name;
 let extensions;
 let packagesSet = false;
 let gitRepo = false;
+let tempDirectory = config.directory.gitTempDirectoryName;
+config.directory.tempDirectory = config.directory.gitTempDirectoryName;
 
 // Set the debug env variable
 process.env.DEBUG = process.argv.includes('debug');
@@ -35,22 +37,16 @@ const start = (answers) => {
   extensions = answers.extensions;
   gitRepo = (typeof answers.gitUrl !== 'undefined') ? answers.gitUrl : false;
 
-  fs.stat(`./${config.directory.gitTempDirectoryName}`, (err, stats) => {
-    // Temp git repository does not exist, continue the installation
-    if (err) {
-      return startCallback();
-    }
+  if (gitRepo) {
+    config.directory.tempDirectory = config.directory.gitTempDirectoryName;
+  }
 
-    console.log('🔨  Removing temporary git directory');
-    rimraf(`./${config.directory.gitTempDirectoryName}`);
-    
-    return startCallback();
-  });
+  Helpers.removeTempDirectories(startCallback);
 };
 
 const startCallback = () => {
   if (gitRepo) {
-    return removeGitTempDir();
+    return pullGitRepository();
   }
 
   return continueSetup();
@@ -62,24 +58,21 @@ const quickStart = () => {
   name = props[1];
   extensions = true; // True means all extensions are used
 
-  continueSetup();
-};
-
-const removeGitTempDir = () => {
-  // Callback => pullGitRepository
-  rimraf(`./${config.directory.gitTempDirectoryName}`, pullGitRepository);
+  Helpers.removeTempDirectories(continueSetup);
 };
 
 const pullGitRepository = () => {
   console.log(`✨  Cloning ${gitRepo}`);
-  clone(gitRepo, config.directory.gitTempDirectoryName, () => {
+  clone(gitRepo, config.directory.tempDirectory, () => {
     console.log('👌  Finished cloning');
-    removeTempDir();
+    Helpers.emptyLog();
+    
+    return createTempDirectory();
   });
 };
 
 const continueSetup = () => {
-  // Callback => removeTempDir
+  // Callback => createTempDirectory
   fs.stat(`./_viewlayers/${setup}`, (err, stats) => {
     if (err) {
       Helpers.exit(`Setup directory '${setup}' does not exist in _viewlayers`);
@@ -89,22 +82,19 @@ const continueSetup = () => {
       Helpers.exit('Setup directory is not a directory');
     }
 
-    removeTempDir();
+    return createTempDirectory();
   });
-};
-
-// Remove temporary directory
-const removeTempDir = () => {
-  console.log('🔨  Removing temporary directory');
-  // Callback => createTempDirectory
-  rimraf(`./${config.directory.tempDirectoryName}`, createTempDirectory);
 };
 
 // Create temporary directory for the application
 const createTempDirectory = () => {
-  console.log(`🔨  Creating directory '${config.directory.tempDirectoryName}'`);
+  console.log(`🔨  Creating directory '${config.directory.tempDirectory}'`);
   // Callback => copyPackageJson
-  fs.mkdir(config.directory.tempDirectoryName, copyPackageJson);
+  if (gitRepo) {
+    return copyPackageJson();
+  }
+
+  fs.mkdir(config.directory.tempDirectory, copyPackageJson);
 };
 
 // packages.js exists | Callback => installPackages
@@ -136,7 +126,7 @@ const copyPackageJson = () => {
 
 const installPackages = () => {
   // Move node process to new directory
-  process.chdir(config.directory.tempDirectoryName);
+  process.chdir(config.directory.tempDirectory);
 
   const setupPackages = Package.createPackageString(configuration);
   
@@ -180,7 +170,7 @@ const checkIfESLintEnabled = () => {
 }
 
 const removeESLintConfig = () => {
-  const ESLintPath = `${config.directory.tempDirectoryName}/.eslintrc`;
+  const ESLintPath = `${config.directory.tempDirectory}/.eslintrc`;
   fs.stat(ESLintPath, (err, stats) => {
     fs.unlink(ESLintPath, (err) => {
       if (err) {
@@ -226,7 +216,7 @@ const cleanup = () => {
   fs.readdir('.', (err, files) => {
     // If packages.js was set, remove them from the directory
     if (packagesSet) {
-      files.push(`./${config.directory.tempDirectoryName}/packages.js`);
+      files.push(`./${config.directory.tempDirectory}/packages.js`);
     }
 
     Helpers.removeFiles(files, moveTempFilesToRoot);

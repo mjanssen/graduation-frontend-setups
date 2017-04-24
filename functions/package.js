@@ -38,7 +38,7 @@ module.exports.createPackageString = (dependencies) => {
 
 module.exports.movePackageJson = (setup, callback) => {
   // Copy the package.json file and update the content (name, description, setup)
-  ncp(`./_config/package.json`, `./${config.directory.tempDirectoryName}/package.json`, {
+  ncp(`./_config/package.json`, `./${config.directory.tempDirectory}/package.json`, {
     transform: (read, write, file) => {
       read
       .pipe(replace('_NAME_', config.defaultApplicationName))

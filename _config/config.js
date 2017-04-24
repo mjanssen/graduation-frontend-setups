@@ -5,6 +5,7 @@ module.exports = {
   directory: {
     tempDirectoryName: 'temp-application',
     gitTempDirectoryName: 'temp-git-repo',
+    tempDirectory: null,
   },
   questions: {
     requestGitUrl: 'Enter git url',
