@@ -193,10 +193,8 @@ const removeESLintConfig = () => {
 
 // Callback => moveTemplateConfiguration
 const moveBundlerConfiguration = () => {
-  // extensions[0] reffers to bundler
-  // Default is webpack configuration
-  const bundler = (typeof extensions[0] === 'undefined') ? 'webpack' : extensions[0];
-  Setup.moveBundlerSetup(extensions[0], moveTemplateConfiguration);
+  const bundler = 'webpack';
+  Setup.moveBundlerSetup(bundler, moveTemplateConfiguration);
 };
 
 // Callback => moveGithooksConfiguration

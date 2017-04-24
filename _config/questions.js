@@ -31,10 +31,6 @@ const getQuestions = setupChoices => (
       message: 'Select the options you want to use in your application (space to select / deselect)',
       choices: [
         {
-          name: 'webpack',
-          checked: true,
-        },
-        {
           name: 'eslint',
           checked: true,
         },
