@@ -1,7 +1,12 @@
 // Node packages
-const fs = require('fs');
-const rimraf = require('rimraf');
-const clone = require('git-clone');
+try {
+  const fs = require('fs');
+  const rimraf = require('rimraf');
+  const clone = require('git-clone');
+} catch (e) {
+  console.log(`🙁  Packages missing, run 'npm install' / 'yarn install' first`);
+  process.exit(0);
+}
 
 // Custom config files
 const defaultPackages = require('./packages/default-packages');

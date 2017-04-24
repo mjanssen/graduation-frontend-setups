@@ -1,6 +1,11 @@
-const fs = require('fs');
-const readline = require('readline');
-const inquirer = require('inquirer');
+try {
+  const fs = require('fs');
+  const readline = require('readline');
+  const inquirer = require('inquirer');
+} catch (e) {
+  console.log(`🙁  Packages missing, run 'npm install' / 'yarn install' first`);
+  process.exit(0);
+}
 
 // Require questions
 const questions = require('./_config/questions');
