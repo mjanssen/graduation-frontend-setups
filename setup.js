@@ -34,12 +34,26 @@ const start = (answers) => {
   extensions = answers.extensions;
   gitRepo = (typeof answers.gitUrl !== 'undefined') ? answers.gitUrl : false;
 
+  fs.stat(`./${config.directory.gitTempDirectoryName}`, (err, stats) => {
+    // Temp git repository does not exist, continue the installation
+    if (err) {
+      return startCallback();
+    }
+
+    console.log('🔨  Removing temporary git directory');
+    rimraf(`./${config.directory.gitTempDirectoryName}`);
+    
+    return startCallback();
+  });
+};
+
+const startCallback = () => {
   if (gitRepo) {
     return removeGitTempDir();
   }
 
-  continueSetup();
-};
+  return continueSetup();
+}
 
 // This function is called when a user calls index.js
 const quickStart = () => {
@@ -51,7 +65,6 @@ const quickStart = () => {
 };
 
 const removeGitTempDir = () => {
-  console.log('🔨  Removing temporary git directory');
   // Callback => pullGitRepository
   rimraf(`./${config.directory.gitTempDirectoryName}`, pullGitRepository);
 };
