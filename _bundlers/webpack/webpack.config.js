@@ -31,6 +31,7 @@ const webpackConfig = {
     alias: {
       components: path.resolve(dir, 'app/components'),
       style: path.resolve(dir, 'app/style'),
+      root: path.resolve(dir, 'app'), // Only use this alias to import necessery files
     },
   },
   output: {
@@ -70,6 +71,7 @@ const webpackConfig = {
       },
     }),
     new webpack.DefinePlugin({
+      __DEV__: (ENV === 'development'),
       'process.env': {
         NODE_ENV: JSON.stringify(ENV),
       },
