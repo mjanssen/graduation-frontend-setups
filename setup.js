@@ -194,8 +194,17 @@ const removeESLintConfig = () => {
 
 // Callback => moveTemplateConfiguration
 const moveBundlerConfiguration = () => {
-  const bundler = 'webpack';
-  Setup.moveBundlerSetup(bundler, moveTemplateConfiguration);
+  const bundlerPath = `${config.directory.tempDirectory}/webpack`;
+  fs.stat(bundlerPath, (err, stats) => {
+    // If there is no webpack directory found
+    if (err) {
+      const bundler = 'webpack';
+      return Setup.moveBundlerSetup(bundler, moveTemplateConfiguration);
+    }
+    
+    // If a webpack setup is already found, skip copying it
+    return moveTemplateConfiguration();
+  });
 };
 
 // Callback => moveGithooksConfiguration
