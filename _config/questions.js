@@ -43,6 +43,11 @@ const getQuestions = setupChoices => (
           checked: true,
         },
       ]
+    },
+    {
+      type: 'confirm',
+      name: 'implementPwa',
+      message: 'Implement Progressive Web for caching your application?'
     }
   ]
 );
