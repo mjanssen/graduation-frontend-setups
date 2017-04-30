@@ -8,11 +8,12 @@
   },
   "scripts": {
     "precommit": "node ./.githooks/pre-commit.js",
-    "build": "NODE_ENV=production webpack --config ./webpack/webpack.config.js",
+    "build": "NODE_ENV=production webpack --config ./webpack/webpack.production.config.js",
     "dev": "webpack-dev-server --config ./webpack/webpack.config.js --open --client-log-level warning",
     "dashboard": "webpack-dashboard -p 9001 -c cyan -- webpack-dev-server --config ./webpack/webpack.config.js --open --client-log-level warning"
   },
   "config": {
-    "setup": "_SETUP_"
+    "setup": "_SETUP_",
+    "pwa": "_PWA_"
   }
 }

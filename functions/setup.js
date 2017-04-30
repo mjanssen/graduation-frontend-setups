@@ -1,4 +1,5 @@
 // Node packages
+const fs = require('fs');
 const ncp = require('ncp').ncp;
 
 // Custom config files
@@ -14,11 +15,21 @@ module.exports.moveBundlerSetup = (bundler, callback) => {
   ncp(`./_bundlers/${bundler}/`, `./${config.directory.tempDirectory}/${bundler}`, callback);
 };
 
-module.exports.moveTemplates = (callback) => {
+module.exports.moveTemplates = (implementPwa, callback) => {
   console.log('Moving templates');
-  ncp(`./_templates/`, `./${config.directory.tempDirectory}/templates`, callback);
+  const templateDirectory = `./${config.directory.tempDirectory}/templates/`;
+  const template = (implementPwa) ? 'index-pwa.html' : 'index.html';
+  fs.mkdir(templateDirectory, (err) => {
+    if (!err) {
+      ncp(`./_templates/${template}`, `./${config.directory.tempDirectory}/templates/index.html`, callback);
+    }
+  });
 };
 
+module.exports.moveProgressiveWebAppConfiguration = (callback) => {
+  console.log('Moving Progressive Web App configuration');
+  ncp(`./_pwa/`, `./${config.directory.tempDirectory}/pwa`, callback);
+};
 
 module.exports.moveGithooks = (callback) => {
   console.log('Moving githooks');

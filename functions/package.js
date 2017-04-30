@@ -36,7 +36,7 @@ module.exports.createPackageString = (dependencies) => {
   return packages;
 };
 
-module.exports.movePackageJson = (setup, callback) => {
+module.exports.movePackageJson = (setup, callback, implementPwa) => {
   // Copy the package.json file and update the content (name, description, setup)
   ncp(`./_config/package.json`, `./${config.directory.tempDirectory}/package.json`, {
     transform: (read, write, file) => {
@@ -45,6 +45,7 @@ module.exports.movePackageJson = (setup, callback) => {
       .pipe(replace('_DESCRIPTION_', config.defaultApplicationDescription))
       .pipe(replace('_VERSION_', config.version))
       .pipe(replace('_SETUP_', setup))
+      .pipe(replace('_PWA_', implementPwa))
       .pipe(write);
     }
   }, (err) => {

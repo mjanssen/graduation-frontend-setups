@@ -23,6 +23,8 @@ module.exports.dev = [
   'webpack-dashboard',
   'extract-text-webpack-plugin',
   'html-webpack-plugin',
+  'uglifyjs-webpack-plugin',
+  'copy-webpack-plugin',
 
   // Css stuff
   'node-sass',

@@ -29,8 +29,9 @@ let name;
 let extensions;
 let packagesSet = false;
 let gitRepo = false;
-let tempDirectory = config.directory.gitTempDirectoryName;
-config.directory.tempDirectory = config.directory.gitTempDirectoryName;
+let implementPwa = true;
+
+config.directory.tempDirectory = config.directory.tempDirectoryName;
 
 // Set the debug env variable
 process.env.DEBUG = process.argv.includes('debug');
@@ -45,6 +46,7 @@ const start = (answers) => {
   setup = answers.setup;
   extensions = answers.extensions;
   gitRepo = (typeof answers.gitUrl !== 'undefined') ? answers.gitUrl : false;
+  implementPwa = answers.implementPwa;
 
   if (gitRepo) {
     config.directory.tempDirectory = config.directory.gitTempDirectoryName;
@@ -131,7 +133,7 @@ const copyPackageJson = () => {
 
     // Use function to move the package.json file. Pass installPackages as callback
     // Callback => installPackages
-    Package.movePackageJson(setup, installPackages);
+    Package.movePackageJson(setup, installPackages, implementPwa);
   });
 };
 
@@ -207,9 +209,16 @@ const moveBundlerConfiguration = () => {
   });
 };
 
-// Callback => moveGithooksConfiguration
+// Callback => moveProgressiveWebAppConfig | moveGithooksConfiguration
 const moveTemplateConfiguration = () => {
-  Setup.moveTemplates(moveGithooksConfiguration);
+    Setup.moveTemplates(implementPwa, (implementPwa) ? moveProgressiveWebAppConfig : moveGithooksConfiguration);
+};
+
+// This function is only called when user answered yes on the pwa question
+// Move the _pwa directory to the temporary application directory
+// Callback => moveGithooksConfiguration
+const moveProgressiveWebAppConfig = () => {
+  Setup.moveProgressiveWebAppConfiguration(moveGithooksConfiguration);
 };
 
 // Callback => cleanup

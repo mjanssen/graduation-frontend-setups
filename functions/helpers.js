@@ -28,7 +28,7 @@ module.exports.removeTempDirectories = (callback) => {
   console.log('🔨  Removing temporary git directory');
   rimraf(`./${config.directory.gitTempDirectoryName}`, () => {
     console.log('🔨  Removing temporary app directory');
-    rimraf(`./${config.directory.gitTempDirectoryName}`, callback);
+    rimraf(`./${config.directory.tempDirectoryName}`, callback);
   });
 };
 
