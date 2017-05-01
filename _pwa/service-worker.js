@@ -1,8 +1,8 @@
 // Set this to true for production
-const doCache = true;
+const doCache = ('_USECACHE_' === 'true');
 
 // Name our cache
-const CACHE_NAME = 'pwa-cache-v1';
+const CACHE_NAME = 'my-pwa-cache-v1';
 
 // Register static files
 const staticFiles = [

@@ -5,6 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackDashboard = require('webpack-dashboard/plugin');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 // Postcss
 const postcssNext = require('postcss-cssnext');
 const postcssLost = require('lost')();
@@ -128,6 +130,25 @@ if (ENV === 'development') {
 if (DASHBOARD && ENV === 'development') {
   webpackConfig.plugins.unshift(
     new WebpackDashboard({ port: config.dashboardPort })
+  );
+}
+
+if (process.env.npm_package_config_pwa === 'true') {
+  webpackConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: `${dir}/pwa/service-worker.js`,
+        transform: content => (
+          content.toString().replace('_USECACHE_', false)
+        ),
+      },
+      {
+        from: `${dir}/pwa/manifest.json`,
+      },
+      {
+        from: `${dir}/pwa/icon.png`,
+      },
+    ])
   );
 }
 
