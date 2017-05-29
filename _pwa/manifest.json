@@ -1,0 +1,15 @@
+{
+  "short_name": "dpdk-setup",
+  "name": "This application was built with the DPDK front-end setup",
+  "icons": [
+    {
+      "src":"icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/?utm_source=homescreen",
+  "background_color": "#282C34",
+  "theme_color": "#282C34",
+  "display": "standalone"
+}

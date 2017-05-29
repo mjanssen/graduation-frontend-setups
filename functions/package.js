@@ -3,7 +3,7 @@ const ncp = require('ncp').ncp;
 const replace = require('stream-replace');
 
 // Custom config files
-const config = require('../config');
+const config = require('../_config/config');
 
 // Define custom functions
 const Helpers = require('../functions/helpers');
@@ -36,15 +36,16 @@ module.exports.createPackageString = (dependencies) => {
   return packages;
 };
 
-module.exports.movePackageJson = (setup, callback) => {
+module.exports.movePackageJson = (setup, callback, implementPwa) => {
   // Copy the package.json file and update the content (name, description, setup)
-  ncp(`./_config/package.json`, `./${config.tempDirectoryName}/package.json`, {
+  ncp(`./_config/package.json`, `./${config.directory.tempDirectory}/package.json`, {
     transform: (read, write, file) => {
       read
       .pipe(replace('_NAME_', config.defaultApplicationName))
       .pipe(replace('_DESCRIPTION_', config.defaultApplicationDescription))
       .pipe(replace('_VERSION_', config.version))
       .pipe(replace('_SETUP_', setup))
+      .pipe(replace('_PWA_', implementPwa))
       .pipe(write);
     }
   }, (err) => {

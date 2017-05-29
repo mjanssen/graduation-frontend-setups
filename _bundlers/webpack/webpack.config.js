@@ -5,6 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackDashboard = require('webpack-dashboard/plugin');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 // Postcss
 const postcssNext = require('postcss-cssnext');
 const postcssLost = require('lost')();
@@ -31,6 +33,7 @@ const webpackConfig = {
     alias: {
       components: path.resolve(dir, 'app/components'),
       style: path.resolve(dir, 'app/style'),
+      root: path.resolve(dir, 'app'), // Only use this alias to import necessery files
     },
   },
   output: {
@@ -70,6 +73,7 @@ const webpackConfig = {
       },
     }),
     new webpack.DefinePlugin({
+      __DEV__: (ENV === 'development'),
       'process.env': {
         NODE_ENV: JSON.stringify(ENV),
       },
@@ -126,6 +130,25 @@ if (ENV === 'development') {
 if (DASHBOARD && ENV === 'development') {
   webpackConfig.plugins.unshift(
     new WebpackDashboard({ port: config.dashboardPort })
+  );
+}
+
+if (process.env.npm_package_config_pwa === 'true') {
+  webpackConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: `${dir}/pwa/service-worker.js`,
+        transform: content => (
+          content.toString().replace('_USECACHE_', false)
+        ),
+      },
+      {
+        from: `${dir}/pwa/manifest.json`,
+      },
+      {
+        from: `${dir}/pwa/icon.png`,
+      },
+    ])
   );
 }
 

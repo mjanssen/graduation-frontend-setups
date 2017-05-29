@@ -3,7 +3,7 @@ const ncp = require('ncp').ncp;
 const rimraf = require('rimraf');
 
 // Custom config files
-const config = require('../config');
+const config = require('../_config/config');
 
 const exit = (message = '') => {
   console.log(message);
@@ -18,6 +18,14 @@ const debug = (message) => {
 
 module.exports.exit = exit;
 module.exports.debug = debug;
+
+module.exports.removeTempDirectories = (callback) => {
+  console.log('🔨  Removing temporary git directory');
+  rimraf(`./${config.directory.gitTempDirectoryName}`, () => {
+    console.log('🔨  Removing temporary app directory');
+    rimraf(`./${config.directory.tempDirectoryName}`, callback);
+  });
+};
 
 module.exports.removeFiles = (files = [], callback) => {
   console.log('Cleaning up...')
@@ -42,7 +50,7 @@ module.exports.removeFiles = (files = [], callback) => {
       return;
     }
 
-    if (file != config.tempDirectoryName) {
+    if (file != config.directory.tempDirectory) {
       rimraf(file, () => {
         debug(`${file} removed`);
         nextFile();
@@ -56,15 +64,15 @@ module.exports.removeFiles = (files = [], callback) => {
 };
 
 module.exports.moveTempFiles = (callback) => {
-  ncp(`./${config.tempDirectoryName}`, `.`, (err) => {
+  ncp(`./${config.directory.tempDirectory}`, `.`, (err) => {
     if (err) {
       exit(err);
     }
     
-    debug(`${config.tempDirectoryName} content copied`);
+    debug(`${config.directory.tempDirectory} content copied`);
 
-    rimraf(config.tempDirectoryName, () => {
-      debug(`${config.tempDirectoryName} removed`);
+    rimraf(config.directory.tempDirectory, () => {
+      debug(`${config.directory.tempDirectory} removed`);
       callback();
     });
   });
