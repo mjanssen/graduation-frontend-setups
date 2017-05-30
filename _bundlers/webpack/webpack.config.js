@@ -102,6 +102,7 @@ if (ENV === 'development') {
     host: config.address,
     historyApiFallback: true,
     public: `localhost:${config.port}`,
+    disableHostCheck: true,
   };
 
   webpackConfig.plugins.push(
