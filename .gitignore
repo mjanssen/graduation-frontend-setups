@@ -4,5 +4,6 @@ npm-debug.log
 .DS_Store
 .idea
 yarn.lock
+../package.json
 temp-application
 temp-git-repo
