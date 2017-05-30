@@ -19,6 +19,7 @@ module.exports.moveTemplates = (implementPwa, callback) => {
   console.log('Moving templates');
   const templateDirectory = `./${config.directory.tempDirectory}/templates/`;
   const template = (implementPwa) ? 'index-pwa.html' : 'index.html';
+
   fs.mkdir(templateDirectory, (err) => {
     if (!err) {
       ncp(`./_templates/${template}`, `./${config.directory.tempDirectory}/templates/index.html`, callback);

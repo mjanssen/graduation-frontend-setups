@@ -30,6 +30,7 @@ let extensions;
 let packagesSet = false;
 let gitRepo = false;
 let implementPwa = true;
+let customPackages = true;
 
 config.directory.tempDirectory = config.directory.tempDirectoryName;
 
@@ -124,12 +125,14 @@ const copyPackageJson = () => {
   fs.stat(`${packagesPath}.js`, (err, stats) => {
 
     if (err) {
+      customPackages = false;
       console.log('No packages.js file found, skipping dependency installation');
-      return moveConfiguration();
     }
     
-    packagesSet = true;
-    configuration = require(packagesPath);
+    if (customPackages) {
+      packagesSet = true;
+      configuration = require(packagesPath);
+    }
 
     // Use function to move the package.json file. Pass installPackages as callback
     // Callback => installPackages
@@ -141,10 +144,13 @@ const installPackages = () => {
   // Move node process to new directory
   process.chdir(config.directory.tempDirectory);
 
-  const setupPackages = Package.createPackageString(configuration);
+  // If setup has custom packages, make sure those are also installed
+  if (customPackages) {
+    const setupPackages = Package.createPackageString(configuration);
+  }
   
-  const devPackages = `${defaultPackages.dev.concat().join(' ')} ${setupPackages.dev}`;
-  const mainPackages = `${defaultPackages.main.concat().join(' ')} ${setupPackages.main}`;
+  const devPackages = `${defaultPackages.dev.concat().join(' ')} ${(customPackages) ? setupPackages.dev : ''}`;
+  const mainPackages = `${defaultPackages.main.concat().join(' ')} ${(customPackages) ? setupPackages.main : ''}`;
 
   // Install normal- and dev dependencies.
   // Callback => moveConfiguration
