@@ -97,6 +97,12 @@ Don't hesitate to create an issue. I'm ready to help you out.
 
 ---
 
+## Contributors
+
+Colin van Eenige [GitHub](https://github.com/vaneenige)
+
+---
+
 ## Licence
 
 MIT &copy; Marnix Janssen
