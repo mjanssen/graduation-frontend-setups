@@ -1,6 +1,6 @@
 # What's this?
 
-This repository allows developers to create a complete front-end setup with all the tools a developer needs (check [included tools](#included-tools)). It even removes itself when it's done!
+This repository allows developers to create a complete front-end setup with all the tools a developer needs (check [included tools](#included-tools)). It even removes itself when it's done! You can even use your own application setup, without the hassle of configuring a module bundler like Webpack :crystal_ball:
 
 ---
 
@@ -13,6 +13,11 @@ The application has the following setups implemented:
 - `react` :atom_symbol:
 - `react-router` :atom_symbol:
 - `vue` :leaves:
+
+## Available setups using a git repo
+*These setups can be installed during `node start.js`.*
+
+- DPDK's front-end setup: [show me](https://github.com/mjanssen/graduation-dpdk-setup) |  https://github.com/mjanssen/graduation-dpdk-setup.git
 
 ---
 
@@ -30,7 +35,7 @@ You got two options now, use the configurator to enable / disable some extension
 - Follow instructions
 - Profit!
 
-#### Fast process
+#### Fast process (this process does not allow custom git setups (yet :smirk:))
 - Run `node index.js __setup__` (see [available setups](#available-setups))
 - Let the node application handle everything
 - Profit!
@@ -47,7 +52,7 @@ If you do not have `yarn` installed, you should consider installing it ([Install
 installation of your dependencies. Check out their [stats vs npm](https://yarnpkg.com/lang/en/compare/). Or if you want
 a less biased test, check out [this git repo](https://github.com/appleboy/npm-vs-yarn).
 
-Don't worry, the script will fall back to `npm` if `yarn` is not installed :)
+Don't worry, the script will use `npm` instead if it cannot use `yarn` :)
 
 ---
 
@@ -67,8 +72,11 @@ Included:
   - HMR (for a great developer experience)
   - Access it from other devices (`http://your-ip:port` (by default the port will be 9000))
   - Babel compiling for the ES6 fans :fire:
-- eslint
-- githooks to prevent the messy git commits ;)
+- eslint *
+- githooks * to prevent the messy git commits ;)
+- editorconfig *
+
+*Items with an * are optional while using the configuration process*
 
 ---
 
@@ -91,4 +99,4 @@ Don't hesitate to create an issue. I'm ready to help you out.
 
 ## Licence
 
-MIT
+MIT &copy; Marnix Janssen
