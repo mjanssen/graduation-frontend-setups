@@ -78,7 +78,7 @@ const pullGitRepository = () => {
   clone(gitRepo, config.directory.tempDirectory, () => {
     console.log('👌  Finished cloning');
     Helpers.emptyLog();
-    
+
     // Remove .git directory from the pulled repo
     // Callback => createTempDirectory
     rimraf(`./${config.directory.tempDirectory}/.git`, createTempDirectory);
@@ -128,7 +128,7 @@ const copyPackageJson = () => {
       customPackages = false;
       console.log('No packages.js file found, skipping dependency installation');
     }
-    
+
     if (customPackages) {
       packagesSet = true;
       configuration = require(packagesPath);
@@ -143,12 +143,13 @@ const copyPackageJson = () => {
 const installPackages = () => {
   // Move node process to new directory
   process.chdir(config.directory.tempDirectory);
+  let setupPackages = { dev: '', main: '' };
 
   // If setup has custom packages, make sure those are also installed
   if (customPackages) {
-    const setupPackages = Package.createPackageString(configuration);
+    setupPackages = Package.createPackageString(configuration);
   }
-  
+
   const devPackages = `${defaultPackages.dev.concat().join(' ')} ${(customPackages) ? setupPackages.dev : ''}`;
   const mainPackages = `${defaultPackages.main.concat().join(' ')} ${(customPackages) ? setupPackages.main : ''}`;
 
@@ -209,7 +210,7 @@ const moveBundlerConfiguration = () => {
       const bundler = 'webpack';
       return Setup.moveBundlerSetup(bundler, moveTemplateConfiguration);
     }
-    
+
     // If a webpack setup is already found, skip copying it
     return moveTemplateConfiguration();
   });
@@ -217,7 +218,7 @@ const moveBundlerConfiguration = () => {
 
 // Callback => moveProgressiveWebAppConfig | moveGithooksConfiguration
 const moveTemplateConfiguration = () => {
-    Setup.moveTemplates(implementPwa, (implementPwa) ? moveProgressiveWebAppConfig : moveGithooksConfiguration);
+  Setup.moveTemplates(implementPwa, (implementPwa) ? moveProgressiveWebAppConfig : moveGithooksConfiguration);
 };
 
 // This function is only called when user answered yes on the pwa question
@@ -234,7 +235,7 @@ const moveGithooksConfiguration = () => {
     if (process.env.TESTING === 'true') {
       return Setup.moveGithooks(finished);
     }
-  
+
     return Setup.moveGithooks(cleanup);
   }
 
@@ -242,7 +243,7 @@ const moveGithooksConfiguration = () => {
   if (process.env.TESTING === 'true') {
     return finished();
   }
-  
+
   return cleanup();
 };
 
