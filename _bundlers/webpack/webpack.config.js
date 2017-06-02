@@ -56,7 +56,7 @@ const webpackConfig = {
           loader: [
             `css-loader?modules&importLoaders=1&localIdentName=[path][name]_[local]--[hash:base64:5]&sourceMap=${SOURCEMAP}`,
             'postcss-loader',
-            `sass-loader?sourceMap=${SOURCEMAP}`,
+            'sass-loader',
           ].join('!'),
         }),
       },
@@ -87,10 +87,10 @@ if (process.env.npm_package_config_setup === 'react' || process.env.npm_package_
 
 if (process.env.npm_package_config_setup === 'vue') {
   webpackConfig.module.rules.unshift({
-      test: /\.vue$/,
-      loader: 'vue-loader',
-      exclude: '/node_modules/',
-    });
+    test: /\.vue$/,
+    loader: 'vue-loader',
+    exclude: '/node_modules/',
+  });
 }
 
 if (ENV === 'development') {
