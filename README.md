@@ -13,7 +13,7 @@ The application has the following setups implemented:
 - `react` :atom_symbol:
 - `react-router` :atom_symbol:
 - `vue` :leaves:
-- `plain` *Bootstraps a setup without anything, cool for prototyping*
+- `plain` *Bootstraps a setup without a view-layer, just the webpack config, cool for prototyping*
 
 ## Available setups using a git repo
 *These setups can be installed during `node start.js`.*
