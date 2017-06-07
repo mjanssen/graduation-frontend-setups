@@ -115,7 +115,7 @@ These packages are automatically included in your setup :smile:
 But wait, there's more! Fancy an own webpack setup? Just create a directory named `webpack` next to the `app` directory. Create
 a `webpack.config.js` file for development and a `webpack.production.config.js` for production purposes.
 
-**Note**, Everything within you git repo (`.babelrc`, `.eslint` e.g.) are all imported in your project.
+**Note**, Everything within your git repo (`.babelrc`, `.eslint` e.g.) is imported in your project.
 
 Having a hard time creating your own setup? Let me know :smile:
 
