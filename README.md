@@ -103,6 +103,36 @@ They're all great tools, but they all had something which maked the usage less c
 
 ---
 
+## I want to use my own setup, dawg :dog:
+
+That's cool! This can be done by creating your own git repository. `app/app.js` is the only thing that is required within
+this git repo.
+
+Wait, You want to include packages? Just create a file named `packages.js` next to the `app` directory. Within this file, make
+sure you: `module.exports.main = {}` and `module.exports.dev = {}` (check the [packages.js example](#packagesjs-example)).
+These packages are automatically included in your setup :smile:
+
+But wait, there's more! Fancy an own webpack setup? Just create a directory named `webpack` next to the `app` directory. Create
+a `webpack.config.js` file for development and a `webpack.production.config.js` for production purposes.
+
+**Note**, Everything within you git repo (`.babelrc`, `.eslint` e.g.) are all imported in your project.
+
+Having a hard time creating your own setup? Let me know :smile:
+
+#### packages.js example
+```
+module.exports.dev = {
+  'babel-preset-stage-0': 'latest',
+  'uglifyjs-webpack-plugin': '^0.4.3'
+};
+
+module.exports.main = {
+  'preact': 'latest'
+};
+```
+
+---
+
 ## Help! Something is not working!
 
 Don't hesitate to create an issue. I'm ready to help you out.
