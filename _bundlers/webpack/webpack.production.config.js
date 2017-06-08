@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
@@ -15,6 +16,7 @@ const dir = path.resolve(`${__dirname}/..`);
 
 // Define environment
 const ENV = 'production';
+const SOURCEMAP = false;
 
 const buildDirectoryName = 'dist';
 const distDirectory = path.resolve(dir, buildDirectoryName);
