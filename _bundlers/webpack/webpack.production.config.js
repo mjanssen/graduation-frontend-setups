@@ -115,7 +115,8 @@ webpackSettings.plugins.push(
       dead_code: true,
     },
   }),
-  new webpack.optimize.AggressiveMergingPlugin()
+  new webpack.optimize.AggressiveMergingPlugin(),
+  new webpack.optimize.ModuleConcatenationPlugin()
 );
 
 if (process.env.npm_package_config_pwa === 'true') {

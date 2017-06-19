@@ -18,7 +18,7 @@ module.exports.dev = [
   'eslint-plugin-import',
 
   // Webpack stuff
-  'webpack',
+  'webpack@3.x',
   'webpack-dev-server',
   'webpack-dashboard',
   'extract-text-webpack-plugin',
