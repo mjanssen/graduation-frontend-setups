@@ -123,17 +123,19 @@ if (process.env.npm_package_config_pwa === 'true') {
   webpackSettings.plugins.push(
     new CopyWebpackPlugin([
       {
+        from: {
+          glob: `${dir}/pwa/*`,
+          dot: false,
+        },
+        ignore: '**/*.js',
+        flatten: true,
+      },
+      {
         from: `${dir}/pwa/service-worker.js`,
         transform: content => (
           content.toString().replace('_USECACHE_', true)
         ),
-      },
-      {
-        from: `${dir}/pwa/manifest.json`,
-      },
-      {
-        from: `${dir}/pwa/icon.png`,
-      },
+      }
     ])
   );
 }
