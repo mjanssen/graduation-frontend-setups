@@ -25,6 +25,7 @@ module.exports.dev = [
   'html-webpack-plugin',
   'uglifyjs-webpack-plugin',
   'copy-webpack-plugin',
+  'webpack-bundle-analyzer',
 
   // Css stuff
   'node-sass',

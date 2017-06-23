@@ -9,6 +9,7 @@
   "scripts": {
     "precommit": "node ./.githooks/pre-commit.js",
     "build": "NODE_ENV=production webpack --config ./webpack/webpack.production.config.js",
+    "stats": "NODE_ENV=production webpack --config ./webpack/webpack.production.config.js --env.stats",
     "dev": "webpack-dev-server --config ./webpack/webpack.config.js --open --client-log-level warning",
     "dashboard": "webpack-dashboard -p 9001 -c cyan -- webpack-dev-server --config ./webpack/webpack.config.js --open --client-log-level warning"
   },

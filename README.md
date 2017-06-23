@@ -52,9 +52,19 @@ You got two options now, use the configurator to enable / disable some extension
 - Let the node application handle everything
 - Profit!
 
-Run `npm run dev` / `yarn run dev` to start the application!
+Run `npm run dev` / `yarn dev` to start the application!
 
-**Or**, if you're an astronaut during the weekends :rocket:, run `npm run dashboard` / `yarn run dashboard` for a cool dashboard.
+**Or**, if you're an astronaut during the weekends :rocket:, run `npm run dashboard` / `yarn dashboard` for a cool dashboard.
+
+#### Building your application
+**Regular build**
+- Run `npm run build` / `yarn build`
+- A `dist` directory will be created, containing an `index.html` and your `main.bundle.js`.
+
+**Build with stats (JS bundle size)**
+- Run `npm run stats` / `yarn stats`
+- A `dist` directory will be created, containing an `index.html`, your `main.bundle.js` and a `bundle-analytics.html` file.
+- Check some cool statistics and remove those crazy-sized bundles from your application #maketheworldabetterplace :boom:
 
 Happy coding :heart:
 
