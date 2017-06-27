@@ -11,14 +11,14 @@ module.exports.dev = [
   'babel-preset-react',
   
   // ESLint stuff
-  'eslint',
+  'eslint@^3.19.0',
   'eslint-config-airbnb',
   'eslint-plugin-jsx-a11y',
   'eslint-plugin-react',
   'eslint-plugin-import',
 
   // Webpack stuff
-  'webpack@3.x',
+  'webpack@^3.0.0',
   'webpack-dev-server',
   'webpack-dashboard',
   'extract-text-webpack-plugin',
