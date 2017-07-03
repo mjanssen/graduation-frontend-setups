@@ -33,7 +33,7 @@ The only requirement is having node.js installed [check it out here](https://nod
 
 **npm**
 
-`git clone https://github.com/mjanssen/graduation-frontend-setups.git ./frontend-setup && cd ./frontend-setup && node start.js`
+`git clone https://github.com/mjanssen/graduation-frontend-setups.git ./frontend-setup && cd ./frontend-setup && npm install && node start.js`
 
 ### Classic way
 
