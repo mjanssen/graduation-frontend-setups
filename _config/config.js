@@ -1,6 +1,6 @@
 module.exports = {
   version: 1.0,
-  defaultApplicationName: 'frontend-setup',
+  applicationName: 'frontend-setup',
   defaultApplicationDescription: 'This package was built with the front-end setup tool',
   directory: {
     tempDirectoryName: 'temp-application',

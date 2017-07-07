@@ -41,7 +41,7 @@ module.exports.movePackageJson = (setup, callback, implementPwa) => {
   ncp(`./_config/package.json`, `./${config.directory.tempDirectory}/package.json`, {
     transform: (read, write, file) => {
       read
-      .pipe(replace('_NAME_', config.defaultApplicationName))
+      .pipe(replace('_NAME_', config.applicationName))
       .pipe(replace('_DESCRIPTION_', config.defaultApplicationDescription))
       .pipe(replace('_VERSION_', config.version))
       .pipe(replace('_SETUP_', setup))

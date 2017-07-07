@@ -77,6 +77,9 @@ const quickStart = () => {
   if (isGitRepo) {
     gitRepo = setup;
     config.directory.tempDirectory = config.directory.gitTempDirectoryName;
+    if (typeof name !== 'undefined' && !name.includes('--')) {
+      config.applicationName = name;
+    }
     Helpers.removeTempDirectories(startCallback);
     return;
   }
