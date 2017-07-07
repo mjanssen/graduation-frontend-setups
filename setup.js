@@ -35,9 +35,9 @@ let customPackages = true;
 config.directory.tempDirectory = config.directory.tempDirectoryName;
 
 // Set the debug env variable
-process.env.DEBUG = process.argv.includes('debug');
-process.env.TESTING = process.argv.includes('testing') || process.argv.includes('skip');
-process.env.SKIP = process.argv.includes('skip');
+process.env.DEBUG = process.argv.includes('--debug');
+process.env.TESTING = process.argv.includes('--testing') || process.argv.includes('--skip');
+process.env.SKIP = process.argv.includes('--skip');
 
 let configuration;
 
@@ -68,7 +68,18 @@ const startCallback = () => {
 const quickStart = () => {
   setup = props[0];
   name = props[1];
+
   extensions = true; // True means all extensions are used
+
+  const regex = /(?:git|ssh|https?|git@[-\w.]+):(\/\/)?(.*?)(\.git)(\/?|\#[-\d\w._]+?)$/;
+  const isGitRepo = regex.test(setup);
+  
+  if (isGitRepo) {
+    gitRepo = setup;
+    config.directory.tempDirectory = config.directory.gitTempDirectoryName;
+    Helpers.removeTempDirectories(startCallback);
+    return;
+  }
 
   Helpers.removeTempDirectories(continueSetup);
 };
