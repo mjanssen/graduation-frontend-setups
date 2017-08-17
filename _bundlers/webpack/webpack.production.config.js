@@ -25,7 +25,7 @@ const buildDirectoryName = 'dist';
 const distDirectory = path.resolve(dir, buildDirectoryName);
 
 // Export for the env variable
-module.exports = (env) => {
+module.exports = env => {
   let stats = false;
   if (typeof env !== 'undefined') {
     stats = true;
@@ -53,7 +53,6 @@ module.exports = (env) => {
     },
   };
 
-
   webpackSettings.module.rules = [
     {
       test: /\.jsx?$/,
@@ -63,9 +62,9 @@ module.exports = (env) => {
     {
       test: /\.(css|scss)$/,
       exclude: [path.resolve(__dirname, 'src/components')],
-      loader: ExtractTextPlugin.extract({
-        fallbackLoader: 'style-loader',
-        loader: [
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
           `css-loader?modules&importLoaders=1&localIdentName=[path][name]_[local]--[hash:base64:5]&sourceMap=${SOURCEMAP}`,
           'postcss-loader',
           `sass-loader?sourceMap=${SOURCEMAP}`,
@@ -85,17 +84,13 @@ module.exports = (env) => {
     new webpack.DefinePlugin(globals),
     new webpack.LoaderOptionsPlugin({
       options: {
-        postcss: () => [
-          postcssNext,
-          postcssLost,
-          postcssReporter,
-        ],
+        postcss: () => [postcssNext, postcssLost, postcssReporter],
       },
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(dir, 'templates/index.html'),
-      minify: { collapseWhitespace: true }
-    })
+      minify: { collapseWhitespace: true },
+    }),
   ];
 
   if (stats) {
@@ -151,13 +146,11 @@ module.exports = (env) => {
         },
         {
           from: `${dir}/pwa/service-worker.js`,
-          transform: content => (
-            content.toString().replace('_USECACHE_', true)
-          ),
-        }
+          transform: content => content.toString().replace('_USECACHE_', true),
+        },
       ])
     );
   }
 
   return webpackSettings;
-}
+};
